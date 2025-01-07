@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Follows extends Model
 {
-    //
+    protected $huarded = ['id'];
 }

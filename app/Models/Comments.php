@@ -6,5 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comments extends Model
 {
-    //
+    protected $guarded = ['id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Posts::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Comments::class, 'parent_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comments::class, 'parent_id');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Votes::class);
+    }
 }

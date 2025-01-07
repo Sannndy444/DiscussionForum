@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade'); // Nested comments
+            $table->text('content');
+            $table->integer('upvotes')->default(0);
+            $table->integer('downvotes')->default(0);
             $table->timestamps();
         });
     }
